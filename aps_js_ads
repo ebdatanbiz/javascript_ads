@@ -1,0 +1,56 @@
+//Programacao_Java_Script
+//Turma_121N
+//Eduardo_Borges_2023100863
+
+
+// Função para verificar se um número é primo
+function ehPrimo(num) {
+    if (num <= 1) return false; // Números menores ou iguais a 1 não são primos
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false; // Se 'num' é divisível por i, não é primo
+    }
+    return true; // Se não encontrou divisores, é primo
+}
+
+// Função para encontrar os N primeiros números primos
+function encontrarNPrimeirosPrimos(n) {
+    let primosEncontrados = [];
+    let numeroAtual = 2; // Começa partir do primeiro número primo
+
+    while (primosEncontrados.length < n) {
+        if (ehPrimo(numeroAtual)) {
+            primosEncontrados.push(numeroAtual); // Adiciona o número primo a lista
+        }
+        numeroAtual++; // Verifica o próximo número da sequência
+    }
+
+    return primosEncontrados; // Retorna a lista de números primos encontrados
+}
+
+// Função principal para interagir com o usuário
+function solicitarOpcao() {
+    const opcao = prompt("Escolha uma opção:\n1. Verificar se um número é primo\n2. Encontrar os N primeiros números primos");
+
+    if (opcao === "1") {
+        const numero = parseInt(prompt("Digite um número para verificar se é primo:"));
+        if (isNaN(numero)) {
+            alert("Insira um número válido.");
+        } else {
+            const resultado = ehPrimo(numero) ? "é primo." : "não é primo.";
+            alert("O número " + numero + " " + resultado);
+        }
+    } else if (opcao === "2") {
+        const n = parseInt(prompt("Digite o número de primos que deseja encontrar:"));
+        if (isNaN(n) || n <= 0) {
+            alert("Por favor, insira um número válido.");
+        } else {
+            const primos = encontrarNPrimeirosPrimos(n);
+            alert("Os " + n + " primeiros números primos são: " + primos.join(", "));
+        }
+    } else {
+        alert("Opção inválida. Por favor, escolha 1 ou 2.");
+    }
+}
+
+// Chama a função para solicitar a opção ao usuário
+solicitarOpcao();
